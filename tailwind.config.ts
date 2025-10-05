@@ -58,6 +58,10 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+      backgroundImage: {
+        'gradient-ocean': 'linear-gradient(135deg, hsl(200, 98%, 39%) 0%, hsl(199, 89%, 48%) 50%, hsl(197, 71%, 73%) 100%)',
+        'gradient-sky': 'linear-gradient(135deg, hsl(199, 89%, 48%) 0%, hsl(197, 71%, 73%) 100%)',
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
