@@ -1,7 +1,9 @@
+import React, { Suspense } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, AlertCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
+const NutritionMap = React.lazy(() => import("./NutritionMap"));
 const MalnutritionHotspots = () => {
   const hotspots = [
     {
@@ -87,6 +89,14 @@ const MalnutritionHotspots = () => {
           Geospatial analysis identifying districts with highest malnutrition burden using
           multi-indicator assessment
         </p>
+
+        <Suspense fallback={<div className="h-[500px] w-full flex items-center justify-center rounded-lg bg-muted">Loading Map...</div>}>
+          {/*
+          <div className="mb-8">
+            <NutritionMap hotspots={hotspots} />
+          </div>
+          */}
+        </Suspense>
 
         <Card className="mb-8 bg-gradient-sky text-white">
           <CardHeader>

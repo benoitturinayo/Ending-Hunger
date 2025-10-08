@@ -1,0 +1,15 @@
+{
+    "created": "2022-01-06T14:08:44.484622",
+    "description": "Simplified GeoJSON ADM2 boundaries for Rwanda",
+    "format": "GeoJSON",
+    "download_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/RWA/ADM2/geoBoundaries-RWA-ADM2_simplified.geojson",
+    "id": "942abc01-84e5-489d-81a1-e80fb038517c",
+    "last_modified": "2025-08-26T11:42:06",
+    "metadata_modified": "2025-08-26T12:04:31.002343",
+    "microdata": false,
+    "dataset_id": "2c9a672b-12df-40f4-8d8c-c4da541b51c6",
+    "resource_type": "api",
+    "name": "geoBoundaries-RWA-ADM2_simplified.geojson",
+    "mimetype": null,
+    "size": "282.3K"
+}

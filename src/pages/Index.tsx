@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HeroSection from "@/components/nutrition/HeroSection";
 import NavigationTabs from "@/components/nutrition/NavigationTabs";
 import OverviewDashboard from "@/components/nutrition/OverviewDashboard";
@@ -10,6 +10,10 @@ import PolicyBriefs from "@/components/nutrition/PolicyBriefs";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("overview");
+
+  useEffect(() => {
+    document.title = "Ending Hidden Hunger";
+  }, []);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -37,8 +41,9 @@ const Index = () => {
       <main className="container mx-auto px-4 py-8 animate-fade-in-up">
         {renderContent()}
       </main>
-      <footer className="bg-card border-t border-border mt-16 py-8">
+      <footer className="bg-card border-t border-border mt-16 py-6">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
+          <p className="text-sm mb-2">Made in Rwanda</p>
           <p className="text-sm">
             Data Sources: World Bank API | HDX Rwanda | Rwanda Ministry of Health | WorldPop
           </p>
