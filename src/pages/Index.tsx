@@ -43,12 +43,11 @@ const Index = () => {
       </main>
       <footer className="bg-card border-t border-border mt-16 py-6">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p className="text-sm mb-2">Made in Rwanda</p>
           <p className="text-sm">
             Data Sources: World Bank API | HDX Rwanda | Rwanda Ministry of Health | WorldPop
           </p>
           <p className="text-xs mt-2">
-            Track 2: Ending Hidden Hunger - Micronutrient Deficiency Analysis
+            TURINAYO Benoit | turinayobenoit2@gmail.com | (+250)781653437
           </p>
         </div>
       </footer>

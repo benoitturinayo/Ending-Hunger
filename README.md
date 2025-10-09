@@ -2,8 +2,10 @@
 
 [![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/tailwind_css-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-**Live Demo:** [Your Deployed Link Here](https://example.com)
+**Live Demo:** [View the Deployed Application](https://ending-hunger.vercel.app/)
 
 ## 📖 About
 
@@ -23,9 +25,13 @@ This project aims to:
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: [React](https://reactjs.org/)
+- **Framework**: [React](https://reactjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Build Tool**: [Vite](https://vitejs.dev/) (or your build tool of choice)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Mapping**: [React Leaflet](https://react-leaflet.js.org/) & [Leaflet](https://leafletjs.com/)
+- **Data Fetching**: [TanStack Query](https://tanstack.com/query/latest)
 
 ## 🚀 Getting Started
 
@@ -43,6 +49,15 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
     cd ending-hunger
     ```
 
+2.  **Create an environment file:**
+
+    This project uses environment variables for configuration. Create a `.env` file in the root of the project and add the following variables. You can use the default values for local development.
+
+    ```env
+    # The base URL for the Vite development server
+    VITE_BASE_URL=/
+    ```
+
 2.  **Install dependencies:**
     ```sh
     npm install
@@ -50,7 +65,7 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
     yarn install
     ```
 
-3.  **Run the development server:**
+4.  **Run the development server:**
     ```sh
     npm run dev
     # or
@@ -59,10 +74,18 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
 
     Open [http://localhost:5173](http://localhost:5173) (or the port specified in your console) to view it in the browser.
 
-## 📄 License
+## 📂 Project Structure
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Here's an overview of the key directories in this project:
 
----
-
-*This README was generated with the help of Gemini Code Assist.*
+```
+src
+├── components
+│   ├── nutrition/  # Core components for the nutrition dashboard
+│   └── ui/         # Reusable UI components from shadcn/ui
+├── lib/            # Utility functions (e.g., cn for Tailwind)
+├── pages/          # Top-level page components
+├── App.tsx         # Main application component with routing
+├── main.tsx        # Application entry point
+└── index.css       # Global styles and Tailwind CSS configuration
+```

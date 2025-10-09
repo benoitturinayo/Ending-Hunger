@@ -1,121 +1,188 @@
-// "use client";
+import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
-// import React, { useState, useEffect } from "react";
-// import { MapContainer, GeoJSON, Popup, CircleMarker, TileLayer } from "react-leaflet";
-// import L from "leaflet";
-// import { LatLngExpression } from "leaflet";
-// import healthFacilities from "../../../rwanda.geojson";
-// import { districtBoundariesData } from "./rwa_adm2_boundaries.geojson";
+// Fix for default markers in react-leaflet
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+});
 
-// // NOTE: You will need to install react-leaflet and leaflet:
-// // npm install react-leaflet leaflet
-// // npm install -D @types/leaflet
+interface Hotspot {
+  district: string;
+  severity: string;
+  stunting: number;
+  coordinates: { lat: number; lng: number };
+  [key: string]: any;
+}
 
-// interface Hotspot {
-//   district: string;
-//   province: string;
-//   stunting: number;
-//   anemia: number;
-//   severity: string;
-//   population: number;
-//   coordinates: { lat: number; lng: number };
-//   factors: string[];
-// }
+interface NutritionMapProps {
+  hotspots: Hotspot[];
+}
 
-// interface NutritionMapProps {
-//   hotspots: Hotspot[];
-// }
+const NutritionMap: React.FC<NutritionMapProps> = ({ hotspots }) => {
+  const [districtData, setDistrictData] = React.useState<any>(null);
+  const [nationalData, setNationalData] = React.useState<any>(null);
 
-// const healthFacilitiesData = healthFacilities as GeoJSON.FeatureCollection;
+  const getColor = (severity: string) => {
+    switch (severity) {
+      case 'critical': return '#ef4444';
+      case 'high': return '#f97316';
+      default: return '#6b7280';
+    }
+  };
 
-// const NutritionMap = ({ hotspots }: NutritionMapProps) => {
-//   const center: LatLngExpression = [-1.9403, 29.8739]; // Centered on Rwanda
-//   const districtBoundaries = districtBoundariesData as GeoJSON.FeatureCollection;
+  // Load real GeoJSON data
+  React.useEffect(() => {
+    // Rwanda National Boundary from Natural Earth Data
+    fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_0_countries.geojson')
+      .then(response => response.json())
+      .then(data => {
+        const rwanda = data.features.find((f: any) => 
+          f.properties.ADMIN === 'Rwanda' || f.properties.NAME === 'Rwanda'
+        );
+        if (rwanda) {
+          setNationalData({
+            type: "FeatureCollection",
+            features: [rwanda]
+          });
+        }
+      })
+      .catch(error => console.error('Error loading national data:', error));
 
-//   const generateDistrictGeoJSON = (boundaries: GeoJSON.FeatureCollection | null, currentHotspots: Hotspot[]): GeoJSON.FeatureCollection => {
-//     const hotspotMap = new Map(currentHotspots.map(h => [h.district, h]));
+    // Rwanda Districts from geoBoundaries API
+    fetch('https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/RWA/ADM2/geoBoundaries-RWA-ADM2.geojson')
+      .then(response => response.json())
+      .then(data => {
+        setDistrictData(data);
+      })
+      .catch(error => {
+        console.error('Error loading district data:', error);
+        // Fallback to simplified data
+        loadSimplifiedData();
+      });
+  }, []);
 
-//     const features = (boundaries?.features || []).map(feature => {
-//       const districtName = feature.properties?.shapeName;
-//       const hotspotData = hotspotMap.get(districtName);
+  const loadSimplifiedData = () => {
+    // Simplified Rwanda boundaries as fallback
+    const simplifiedNational = {
+      type: "FeatureCollection",
+      features: [
+        {
+          type: "Feature",
+          properties: { name: "Rwanda" },
+          geometry: {
+            type: "Polygon",
+            coordinates: [[
+              [29.0, -1.0], [31.0, -1.0], [31.0, -2.9], [29.0, -2.9], [29.0, -1.0]
+            ]]
+          }
+        }
+      ]
+    };
+    setNationalData(simplifiedNational);
+  };
 
-//       if (hotspotData) {
-//         return {
-//           ...feature,
-//           properties: {
-//             ...feature.properties,
-//             ...hotspotData,
-//           },
-//         };
-//       }
-//       return feature;
-//     }).filter(Boolean) as GeoJSON.Feature[];
+  // National boundary style
+  const nationalBoundaryStyle = {
+    color: '#1f2937',
+    weight: 3,
+    fillOpacity: 0.1,
+    fillColor: '#3b82f6',
+    opacity: 1
+  };
 
-//     return {
-//       type: "FeatureCollection",
-//       features,
-//     };
-//   }
+  // District boundary style
+  const districtBoundaryStyle = {
+    color: '#4b5563',
+    weight: 1.5,
+    fillOpacity: 0.05,
+    fillColor: '#9ca3af',
+    opacity: 0.8
+  };
 
-//   const districtGeoJSON = generateDistrictGeoJSON(districtBoundaries, hotspots);
+  const onEachDistrict = (feature: any, layer: L.Layer) => {
+    // Extract district name from various possible property names in the GeoJSON
+    const districtName = feature.properties.shapeName || 
+                        feature.properties.shapeName || 
+                        feature.properties.ADM2_EN || 
+                        feature.properties.NAME_2 || 
+                        feature.properties.name ||
+                        feature.properties.ADM2_FR ||
+                        feature.properties.ADM2_ES ||
+                        'District';
+    
+    // Embed district name in tooltip
+    layer.bindTooltip(`
+      <div class="text-center font-semibold text-gray-800">
+        ${districtName}
+      </div>
+    `, {
+      permanent: false,
+      sticky: true,
+      direction: 'center',
+      className: 'district-tooltip bg-white px-3 py-2 rounded-lg border border-gray-300 shadow-lg'
+    });
+  };
 
-//   const getStyle = (feature: any) => {
-//     // Style districts based on stunting prevalence.
-//     // You can create more complex logic here.
-//     const stunting = feature.properties.stunting;
-//     return {
-//       fillColor: stunting > 38 ? "#e53e3e" : stunting > 35 ? "#f6ad55" : "#68d391",
-//       weight: 2,
-//       opacity: 1,
-//       color: "white",
-//       dashArray: "3",
-//       fillOpacity: 0.7,
-//     };
-//   };
+  return (
+    <div className="h-[500px] w-full rounded-lg overflow-hidden border-2 border-gray-400">
+      <MapContainer
+        center={[-1.9403, 29.8739]}
+        zoom={8}
+        style={{ height: '100%', width: '100%' }}
+        scrollWheelZoom={true}
+        minZoom={7}
+        maxZoom={12}
+      >
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        />
 
-//   const onEachFeature = (feature: any, layer: any) => {
-//     if (feature.properties) {
-//       const { shapeName: NAME_2, stunting, anemia } = feature.properties;
-//       layer.bindPopup(`
-//         <strong>${NAME_2}</strong><br/>
-//         Stunting: ${stunting ? `${stunting}%` : 'N/A'}<br/>
-//         Anemia: ${anemia ? `${anemia}%` : 'N/A'}<br/>
-//       `);
-//     }
-//   };
+        {/* Real Rwanda National Boundary */}
+        {nationalData && (
+          <GeoJSON 
+            data={nationalData} 
+            style={nationalBoundaryStyle}
+          />
+        )}
 
-//   return (
-//     <MapContainer
-//       center={center}
-//       zoom={8}
-//       scrollWheelZoom={true}
-//       style={{ height: "500px", width: "100%", borderRadius: "0.5rem", backgroundColor: '#f0f0f0' }}
-//     >
-//       <TileLayer
-//         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-//         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-//       />
+        {/* Real Rwanda District Boundaries from geoBoundaries API */}
+        {districtData && (
+          <GeoJSON 
+            data={districtData} 
+            style={districtBoundaryStyle}
+            onEachFeature={onEachDistrict}
+          />
+        )}
+        
+        {/* Hotspot Markers */}
+        {hotspots.map((hotspot, index) => (
+          <Marker 
+            key={index} 
+            position={[hotspot.coordinates.lat, hotspot.coordinates.lng]}
+            icon={L.divIcon({
+              className: 'custom-marker',
+              html: `<div style="background-color: ${getColor(hotspot.severity)}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
+              iconSize: [20, 20],
+            })}
+          >
+            <Popup>
+              <div className="p-2">
+                <strong>{hotspot.district}</strong><br/>
+                Stunting: {hotspot.stunting}%<br/>
+                Severity: {hotspot.severity}
+              </div>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
+  );
+};
 
-//       {/* This GeoJSON component will render your district boundaries. */}
-//       <GeoJSON data={districtGeoJSON} style={getStyle} onEachFeature={onEachFeature} />
-
-//       {/* This will render markers for health facilities */}
-//       {healthFacilitiesData.features.map((facility, idx) => {
-//         if (facility.geometry.type === "Point") {
-//           // GeoJSON coordinates are [lng, lat], Leaflet needs [lat, lng]
-//           const coordinates: LatLngExpression = [facility.geometry.coordinates[1], facility.geometry.coordinates[0]];
-//           const name = facility.properties?.name || "Health Facility";
-
-//           return (
-//             <CircleMarker key={idx} center={coordinates} radius={5} pathOptions={{ color: 'blue', fillColor: 'lightblue', fillOpacity: 1 }}>
-//               <Popup>{name}</Popup>
-//             </CircleMarker>
-//           );
-//         }
-//         return null;
-//       })}
-//     </MapContainer>
-//   );
-// };
-
-// export default NutritionMap;
+export default NutritionMap;

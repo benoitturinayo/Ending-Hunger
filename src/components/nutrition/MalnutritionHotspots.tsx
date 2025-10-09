@@ -91,11 +91,9 @@ const MalnutritionHotspots = () => {
         </p>
 
         <Suspense fallback={<div className="h-[500px] w-full flex items-center justify-center rounded-lg bg-muted">Loading Map...</div>}>
-          {/*
           <div className="mb-8">
             <NutritionMap hotspots={hotspots} />
           </div>
-          */}
         </Suspense>
 
         <Card className="mb-8 bg-gradient-sky text-white">
