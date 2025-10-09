@@ -49,15 +49,6 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
     cd ending-hunger
     ```
 
-2.  **Create an environment file:**
-
-    This project uses environment variables for configuration. Create a `.env` file in the root of the project and add the following variables. You can use the default values for local development.
-
-    ```env
-    # The base URL for the Vite development server
-    VITE_BASE_URL=/
-    ```
-
 2.  **Install dependencies:**
     ```sh
     npm install
