@@ -1,3 +1,4 @@
+
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Map, BarChart2, Droplets, Wheat } from "lucide-react";
@@ -7,12 +8,15 @@ interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
+
 const navigation = [
   { name: "Hotspot Map", href: "/", icon: Map },
   { name: "Analytics", href: "/analytics", icon: BarChart2 },
   { name: "Water Access", href: "/water", icon: Droplets },
   { name: "Crop Yields", href: "/crops", icon: Wheat },
 ];
+
+
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
