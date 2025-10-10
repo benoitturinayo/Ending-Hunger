@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/Component/ui/card";
 import { MapPin, AlertCircle } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/Component/ui/badge";
 
 const NutritionMap = React.lazy(() => import("./NutritionMap"));
 const MalnutritionHotspots = () => {

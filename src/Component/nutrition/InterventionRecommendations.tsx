@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Component/ui/card";
 import { Target, Users, Sprout, GraduationCap, Heart, Building } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/Component/ui/badge";
 
 const InterventionRecommendations = () => {
   const interventions = [

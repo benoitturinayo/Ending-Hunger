@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/Component/ui/card";
 import { Brain, TrendingUp, AlertTriangle, Target } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/Component/ui/badge";
+import { Progress } from "@/Component/ui/progress";
+import { Button } from "@/Component/ui/button";
 
 const initialModelPerformance = [
   {

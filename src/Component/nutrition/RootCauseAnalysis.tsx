@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Component/ui/card";
 import { Search, Users, DollarSign, Home, Droplets, Book } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
+import { Progress } from "@/Component/ui/progress";
 
 const RootCauseAnalysis = () => {
   const rootCauses = [

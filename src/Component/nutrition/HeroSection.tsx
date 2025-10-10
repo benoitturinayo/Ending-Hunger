@@ -9,10 +9,10 @@ const HeroSection = () => {
             Ending Hidden Hunger
           </h1>
           <p className="text-xl md:text-2xl opacity-90 mb-2">
-            Track 2: Addressing Micronutrient Deficiencies in Rwanda
+             Addressing micronutrient deficiencies in Rwanda
           </p>
           <p className="text-lg opacity-80">
-            Geospatial Analysis • Predictive Models • Data-Driven Policy
+            Geospatial analysis, predictive models and data-driven policy
           </p>
         </div>
 

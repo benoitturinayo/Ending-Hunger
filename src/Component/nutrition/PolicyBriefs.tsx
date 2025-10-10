@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Component/ui/card";
 import { FileText, Download, Users, TrendingUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/Component/ui/button";
+import { Badge } from "@/Component/ui/badge";
 
 const PolicyBriefs = () => {
   const policyBriefs = [
