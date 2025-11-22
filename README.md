@@ -6,6 +6,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/tailwind_css-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 **Live Demo:** [View the Deployed Application](https://ending-hunger.vercel.app/)
+**Video Demo:** [Watch a short video of the project](https://drive.google.com/file/d/1BMvZFG9NV3-smKlBwHGxVErUQOkyUYIF/view?usp=sharing)
 
 ## 📖 About
 
@@ -33,7 +34,32 @@ This project aims to:
 - **Mapping**: [React Leaflet](https://react-leaflet.js.org/) & [Leaflet](https://leafletjs.com/)
 - **Data Fetching**: [TanStack Query](https://tanstack.com/query/latest)
 
-## 🚀 Getting Started
+## 📊 Data Sources and API
+
+This platform integrates data from several authoritative sources to provide a comprehensive view of nutrition and public health in Rwanda. The data is accessed via public APIs or downloaded from data portals.
+
+*   **[World Bank API](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information)**
+    *   **Description**: Provides key development indicators, including health and nutrition statistics like stunting, wasting, and anemia rates.
+    *   **Endpoint Example**: Accessing data for a specific indicator in Rwanda.
+        ```
+        https://api.worldbank.org/v2/country/RWA/indicator/SH.STA.STNT.ZS
+        ```
+
+*   **[Humanitarian Data Exchange (HDX) - Rwanda](https://data.humdata.org/country/rwa)**
+    *   **Description**: Offers datasets related to humanitarian response, including food security assessments, population density, and locations of health facilities. Data is typically available in formats like CSV, SHP, and GeoJSON.
+    *   **API Access**: Datasets can be accessed programmatically via the [HDX API (CKAN)](https://docs.data.humdata.org/).
+
+*   **[Rwanda Ministry of Health (MoH)](https://www.moh.gov.rw/)**
+    *   **Description**: The official source for national health policies, reports, and survey data (like the Demographic and Health Survey - DHS). This data provides the foundational context for public health interventions.
+
+*   **[WorldPop](https://www.worldpop.org/)**
+    *   **Description**: Delivers high-resolution, open-source geospatial demographic data, including population distribution, which is crucial for accurately mapping malnutrition hotspots and allocating resources.
+
+## � Getting Started
+
+### 📄 Project Documentation
+
+*   **Academic Document**: [To Whom It May Concern](https://drive.google.com/file/d/11fkM19nzAChJiTr42L6KwUQvaumpcgN4/view?usp=sharing)
 
 Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
@@ -45,8 +71,8 @@ Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.co
 
 1.  **Clone the repository:**
     ```sh
-    git clone https://github.com/your-username/ending-hunger.git
-    cd ending-hunger
+    git clone https://github.com/your-username/Zero-Hunger.git
+    cd Zero-Hunger
     ```
 
 2.  **Install dependencies:**

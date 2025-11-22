@@ -59,3 +59,23 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
+<!-- Gemini AI Assistant -->
+
+    <!-- The chat widget -->
+    <div id="gemini-chat-widget" class="gemini-chat-widget hidden">
+        <div class="gemini-chat-header">
+            <h3>Gemini Assistant</h3>
+            <button id="gemini-chat-close" class="gemini-chat-close-button">&times;</button>
+        </div>
+        <div id="gemini-chat-messages" class="gemini-chat-messages">
+            <!-- Chat messages will be appended here -->
+        </div>
+        <div class="gemini-chat-input-area">
+            <form id="gemini-chat-form" class="gemini-chat-form">
+                <input type="text" id="gemini-chat-input" placeholder="Ask me anything..." autocomplete="off">
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+</div>

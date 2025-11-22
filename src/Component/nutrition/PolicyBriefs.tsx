@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/Component/ui/card";
-import { FileText, Download, Users, TrendingUp } from "lucide-react";
+import { FileText, Users, TrendingUp } from "lucide-react";
 import { Button } from "@/Component/ui/button";
 import { Badge } from "@/Component/ui/badge";
 
@@ -168,12 +168,6 @@ const PolicyBriefs = () => {
                 </div>
               </div>
 
-              <div className="flex justify-end">
-                <Button variant="outline" size="sm" className="gap-2">
-                  <Download className="w-4 h-4" />
-                  Download Full Brief (PDF)
-                </Button>
-              </div>
             </CardContent>
           </Card>
         ))}
@@ -201,7 +195,7 @@ const PolicyBriefs = () => {
               <TrendingUp className="w-10 h-10 mx-auto mb-3 text-primary" />
               <h4 className="font-bold mb-2">Adaptive Management</h4>
               <p className="text-sm text-muted-foreground">
-                Regular monitoring and policy adjustments based on results
+                Robust regular monitoring and policy adjustments based on results
               </p>
             </div>
           </div>

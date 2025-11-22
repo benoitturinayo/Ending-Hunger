@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import HeroSection from "@/components/nutrition/HeroSection";
-import OverviewDashboard from "@/components/nutrition/OverviewDashboard";
-import MalnutritionHotspots from "@/components/nutrition/MalnutritionHotspots";
-import PredictiveModels from "@/components/nutrition/PredictiveModels";
-import RootCauseAnalysis from "@/components/nutrition/RootCauseAnalysis";
-import InterventionRecommendations from "@/components/nutrition/InterventionRecommendations";
-import PolicyBriefs from "@/components/nutrition/PolicyBriefs";
-import Sidebar from "@/components/nutrition/Sidebar";
+import { useState, useEffect, useMemo } from "react";
+import HeroSection from "@/Component/nutrition/HeroSection";
+import OverviewDashboard from "@/Component/nutrition/OverviewDashboard";
+import MalnutritionHotspots from "@/Component/nutrition/MalnutritionHotspots";
+import PredictiveModels from "@/Component/nutrition/PredictiveModels";
+import RootCauseAnalysis from "@/Component/nutrition/RootCauseAnalysis";
+import InterventionRecommendations from "@/Component/nutrition/InterventionRecommendations";
+import PolicyBriefs from "@/Component/nutrition/PolicyBriefs";
+import Sidebar from "@/Component/nutrition/Sidebar";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -15,24 +15,16 @@ const Index = () => {
     document.title = "Ending Hidden Hunger";
   }, []);
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case "overview":
-        return <OverviewDashboard />;
-      case "hotspots":
-        return <MalnutritionHotspots />;
-      case "predictive":
-        return <PredictiveModels />;
-      case "causes":
-        return <RootCauseAnalysis />;
-      case "interventions":
-        return <InterventionRecommendations />;
-      case "policy":
-        return <PolicyBriefs />;
-      default:
-        return <OverviewDashboard />;
-    }
-  };
+  const contentMap: { [key: string]: React.ReactNode } = useMemo(() => ({
+    overview: <OverviewDashboard />,
+    hotspots: <MalnutritionHotspots />,
+    predictive: <PredictiveModels />,
+    causes: <RootCauseAnalysis />,
+    interventions: <InterventionRecommendations />,
+    policy: <PolicyBriefs />,
+  }), []);
+
+  const activeContent = useMemo(() => contentMap[activeTab] || <OverviewDashboard />, [activeTab, contentMap]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -40,16 +32,14 @@ const Index = () => {
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
         <div className="flex-1 flex flex-col h-screen overflow-y-auto">
           <HeroSection />
-          <main className="container mx-auto px-4 py-8 animate-fade-in-up flex-grow">
-            {renderContent()}
-          </main>
+          <main className="container mx-auto px-4 py-8 animate-fade-in-up flex-grow">{activeContent}</main>
           <footer className="bg-card border-t border-border mt-8 py-4">
             <div className="container mx-auto px-4 text-center text-muted-foreground">
               <p className="text-xs">
-                Data Sources: World Bank API | HDX Rwanda | Rwanda Ministry of Health | WorldPop
+                Data Sources: World Bank API | HDX Rwanda | WorldPop
               </p>
               <p className="text-xs mt-1">
-                TURINAYO Benoit | turinayobenoit2@gmail.com | (+250)781653437
+                TURINAYO Benoit | turinayobenoit2@gmail.com | (+250)781653437  
               </p>
             </div>
           </footer>

@@ -27,8 +27,8 @@ const InterventionRecommendations = () => {
           target: "All children under 5",
           activities: [
             "Monthly growth tracking via community health workers",
-            "Digital health record system implementation",
-            "Early detection protocols for malnutrition",
+            ,
+            "Estabilishing early way of detection protocols for malnutrition",
             "Referral pathways to health facilities",
           ],
           timeline: "3-12 months",
@@ -43,20 +43,20 @@ const InterventionRecommendations = () => {
       priority: "High",
       interventions: [
         {
-          name: "Biofortified Crop Promotion",
+          name: "Micronutrient-enriched food Crop Promotion like maize, potatoes and others",
           target: "Farming households in priority districts",
           activities: [
             "Distribute iron-rich bean seeds",
             "Promote vitamin A-enriched orange sweet potato",
             "Support zinc-enriched maize cultivation",
-            "Provide technical training on biofortified crops",
+            "Unhance and rovide technical training on Micronutrient-enriched food crops",
           ],
           timeline: "6-18 months",
           cost: "Medium ($5.8M/year)",
           impact: "Increase micronutrient intake by 40%",
         },
         {
-          name: "Kitchen Garden Programs",
+          name: " Increase of kitchen garden awareness programs ",
           target: "50,000 rural households",
           activities: [
             "Provide vegetable seeds & training",
@@ -77,12 +77,11 @@ const InterventionRecommendations = () => {
       interventions: [
         {
           name: "School Feeding Enhancement",
-          target: "Primary schools in 15 priority districts",
+          target: "Primary schools in 15 priority districts and local community in affected area",
           activities: [
-            "Fortified porridge breakfast program",
+            "Fortified porridge breakfast program in primary school",
             "Locally-sourced nutritious meals",
-            "Nutrition education curriculum",
-            "Home-grown school feeding initiative",
+            " Food prepation and Health Training in community",
           ],
           timeline: "6-18 months",
           cost: "High ($12.5M/year)",

@@ -19,7 +19,7 @@ const initialModelPerformance = [
     accuracy: 82.1,
     precision: 79.8,
     recall: 85.4,
-    features: ["Geographic location", "Population density", "Climate data"],
+    features: ["Geographic location", "Climate data"],
     status: "validation",
   },
 ];
@@ -76,11 +76,10 @@ const initialPreventionImpact = [
 ];
 
 const availableIndicators = [
-  { id: "rainfall", label: "Below Average Rainfall" },
+  { id: "rainfall", label: " Average Rainfall (Below 900 mm or Above 1,400 mm " },
   { id: "food_prices", label: "Food Price Inflation > 15%" },
-  { id: "conflict", label: "Regional Conflict" },
+  { id: "conflict", label: "Knowledge gap in the community " },
   { id: "crop_failure", label: "Major Crop Failure" },
-  { id: "health_access", label: "Limited Health Facility Access" },
 ];
 
 const PredictiveModels = () => {
@@ -104,7 +103,7 @@ const PredictiveModels = () => {
 
   const calculateRisk = () => {
     const baseRisk = 10;
-    const riskPerIndicator = 18;
+    const riskPerIndicator = 16;
     const riskScore = baseRisk + selectedIndicators.length * riskPerIndicator;
 
     let riskLevel = "Low";
@@ -168,7 +167,7 @@ const PredictiveModels = () => {
       <section>
         <h3 className="text-2xl font-bold mb-6">Interactive Risk calculation</h3>
         <p className="text-muted-foreground mb-6">
-          Select indicators to run a real-time risk simulation for a selected district.
+          Select indicators to run a real-time risk for a selected district.
         </p>
         <Card>
           <CardContent className="p-6">
@@ -199,7 +198,6 @@ const PredictiveModels = () => {
                   </Button>
                   {simulationResult && (
                     <div className="bg-muted rounded-lg p-4 flex-grow">
-                      <h4 className="font-bold mb-2">Simulation Result</h4>
                       <div className="space-y-2">
                         <div className="flex justify-between">
                           <span className="text-sm">Risk Score:</span>

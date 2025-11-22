@@ -1,12 +1,15 @@
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/Component/ui/toaster";
+import { TooltipProvider } from "@/Component/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster as Sonner } from "sonner";
 import Index from "@/pages/Index";
-import "leaflet/dist/leaflet.css";
 import NotFound from "@/pages/NotFound";
+import DashboardLayout from "./Component/nutrition/DashboardLayout";
+import AIAssistant from "./Component/nutrition/AIAssistant";
 
+
+import "leaflet/dist/leaflet.css";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -16,8 +19,19 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+          <Route
+            path="/"
+            element={
+              <DashboardLayout>
+                <div className="flex flex-col gap-6 h-full">
+                  <div className="flex-grow">
+                    <Index /> {/* Your Hotspot Map */}
+                  </div>
+                  <AIAssistant /> {/* AI Assistant below the map */}
+                </div>
+              </DashboardLayout>
+            }
+          />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE. */}
           <Route path="*" element={<NotFound />} />
         </Routes>

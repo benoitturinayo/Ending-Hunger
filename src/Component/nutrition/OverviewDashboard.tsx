@@ -2,6 +2,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/Com
 import { TrendingDown, TrendingUp, AlertTriangle, CheckCircle } from "lucide-react";
 import { Badge } from "@/Component/ui/badge";
 
+
+
+
 const OverviewDashboard = () => {
   const metrics = [
     {
@@ -46,7 +49,7 @@ const OverviewDashboard = () => {
     {
       title: "Micronutrient Deficiencies",
       severity: "high",
-      description: "Iron, Vitamin A, and Zinc deficiencies remain prevalent across all provinces",
+      description: "Iron, Vitamin A and Zinc deficiencies remain prevalent across all provinces",
       impact: "Affects cognitive development and immune function in children",
     },
     {

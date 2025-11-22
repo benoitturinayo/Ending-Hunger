@@ -9,7 +9,7 @@ const HeroSection = () => {
             Ending Hidden Hunger
           </h1>
           <p className="text-xl md:text-2xl opacity-90 mb-2">
-             Addressing micronutrient deficiencies in Rwanda
+            Addressing micronutrient deficiencies in Rwanda
           </p>
           <p className="text-lg opacity-80">
             Geospatial analysis, predictive models and data-driven policy
@@ -31,7 +31,7 @@ const HeroSection = () => {
           
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all duration-300">
             <Users className="w-10 h-10 mx-auto mb-3" />
-            <h3 className="text-2xl font-bold mb-1">13M+</h3>
+            <h3 className="text-2xl font-bold mb-1">14M</h3>
             <p className="text-sm opacity-90">Population</p>
           </div>
           

@@ -11,7 +11,7 @@ const RootCauseAnalysis = () => {
       causes: [
         { factor: "Poverty & low household income", contribution: 45 },
         { factor: "Food price volatility", contribution: 28 },
-        { factor: "Limited livelihood opportunities", contribution: 37 },
+        { factor: "Constrained Economic Opportunities", contribution: 37 },
         { factor: "Agricultural productivity challenges", contribution: 42 },
       ],
       description:
@@ -69,19 +69,6 @@ const RootCauseAnalysis = () => {
       description:
         "Environmental factors affect agricultural productivity and food availability",
     },
-    {
-      category: "Social & Cultural",
-      icon: Users,
-      impact: 58,
-      causes: [
-        { factor: "Gender inequality", contribution: 44 },
-        { factor: "Early marriage & pregnancy", contribution: 37 },
-        { factor: "Cultural food taboos", contribution: 29 },
-        { factor: "Limited women's decision-making", contribution: 42 },
-      ],
-      description:
-        "Social norms and practices influence feeding behaviors and care",
-    },
   ];
 
   const interconnections = [
@@ -125,7 +112,14 @@ const RootCauseAnalysis = () => {
           {rootCauses.map((cause, index) => {
             const Icon = cause.icon;
             return (
-              <Card key={index} className="card-hover">
+              <Card
+                key={index}
+                className={`card-hover ${
+                  rootCauses.length % 2 !== 0 && index === rootCauses.length - 1
+                    ? "lg:col-span-2"
+                    : ""
+                }`}
+              >
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <Icon className="w-8 h-8 text-primary" />

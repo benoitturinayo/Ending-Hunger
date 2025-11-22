@@ -14,7 +14,7 @@ const MalnutritionHotspots = () => {
       severity: "critical",
       population: 466000,
       coordinates: { lat: -1.3000, lng: 30.3333 },
-      factors: ["Low rainfall", "Food insecurity", "Limited health access"],
+      factors: ["Low rainfall"],
     },
     {
       district: "Gatsibo",
@@ -24,7 +24,7 @@ const MalnutritionHotspots = () => {
       severity: "critical",
       population: 433000,
       coordinates: { lat: -1.6500, lng: 30.4167 },
-      factors: ["Rural isolation", "Poor infrastructure", "Low education"],
+      factors: ["Social and geographic distancing in rural zones", "Limited infrastructure"],
     },
     {
       district: "Nyamasheke",
@@ -34,7 +34,7 @@ const MalnutritionHotspots = () => {
       severity: "high",
       population: 400000,
       coordinates: { lat: -2.3333, lng: 29.1333 },
-      factors: ["Mountainous terrain", "Limited market access", "Poverty"],
+      factors: ["Mountain region", "Limited market access", "Poverty"],
     },
     {
       district: "Burera",
@@ -44,7 +44,7 @@ const MalnutritionHotspots = () => {
       severity: "high",
       population: 337000,
       coordinates: { lat: -1.4833, lng: 30.0667 },
-      factors: ["High altitude", "Cold climate", "Land scarcity"],
+      factors: ["High altitude", "Cold climate", "Insufficient arable land"],
     },
     {
       district: "Nyaruguru",
@@ -64,7 +64,7 @@ const MalnutritionHotspots = () => {
       severity: "high",
       population: 338000,
       coordinates: { lat: -1.6833, lng: 29.8000 },
-      factors: ["Limited arable land", "Population density", "Soil degradation"],
+      factors: ["Limited arable land", "Soil degradation"],
     },
   ];
 
